@@ -1,0 +1,21 @@
+{
+    "name": "Sri Lankan Taxes",
+    "version": "17.0.0.1",
+    "category": "Sales",
+    "summary": "Sri Lankan VAT / SVAT / NON VAT in Odoo Sales and Invoice",
+    "author": "Core48",
+    "website": "https://core48.com",
+    "depends": ["sale", "account", "sale_management"],
+    "data": [
+        "views/sale_order_view.xml",
+        "views/sale_report_templates.xml",
+        "views/account_move_view.xml",
+        "views/report_invoice.xml",
+        "views/inherit_company.xml",
+    ],
+    "license": "LGPL-3",
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+    "images": ["static/description/banner.jpg"],
+}

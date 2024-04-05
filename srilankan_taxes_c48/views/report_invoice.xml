@@ -1,0 +1,44 @@
+<odoo>
+    <template id="report_invoice_eg_discount" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[2]/div/h2" position="replace">
+        <h2>
+            <t t-if="o.vat_type">
+                <t t-if="o.vat_type == 'vat'">
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">VAT Invoice</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">VAT Draft Invoice</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">VAT Cancelled Invoice</span>
+                    <span t-if="o.name != '/'" t-field="o.name"/>
+                </t>
+                <t t-elif="o.vat_type == 'svat'">
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">SVAT Invoice</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">SVAT Draft Invoice</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">SVAT Cancelled Invoice</span>
+                    <span t-if="o.name != '/'" t-field="o.name"/>
+                </t>
+                <t t-else="o.vat_type == 'non_vat'">
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                    <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                    <span t-if="o.name != '/'" t-field="o.name"/>
+                </t>
+            </t>
+            <t t-if="not o.vat_type">
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                <span t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                <span t-if="o.move_type == 'out_refund'">Credit Note</span>
+                <span t-if="o.move_type == 'in_refund'">Vendor Credit Note</span>
+                <span t-if="o.move_type == 'in_invoice'">Vendor Bill</span>
+                <span t-if="o.name != '/'" t-field="o.name"/>
+            </t>
+        </h2>
+        </xpath>
+        <xpath expr="//p[@name='payment_communication']" position="after">
+            <t t-if="o.is_qr_code == True">
+                <img class="border border-dark rounded" t-att-src="image_data_uri(res_company.qr_img)" style="max-height: 80px;"/><br/>
+                <span>Scan QR code for your payment</span>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
